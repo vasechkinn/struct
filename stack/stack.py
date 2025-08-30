@@ -31,7 +31,7 @@ class Stack:
         node.prev = self.__top
         self.__top = node
 
-    def pop(self) -> Node | None:
+    def pop(self) -> any | None:
         """
         Удаляет и возвращает Node.Data с вершины стека. 
         Если стек пуст, возвращает None.
@@ -44,7 +44,7 @@ class Stack:
         self.__count -= 1
         return node.data
     
-    def peek(self) -> Node | None:
+    def peek(self) -> any | None:
         """
         Возвращает Node.Data с вершины стека без её удаления.
         Если стек пуст, возвращает None
