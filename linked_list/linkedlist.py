@@ -98,39 +98,49 @@ class LinkedList:
         удалить элемент (первое вхождение)
         :param elem: Node.data
         """
-        if self.__head.next is None:
+        if self.is_empty():
+            return None
+        
+        if self.__count == 1 and self.__head.data == elem:
             self.__head = None
+            self.__count = 0
+            return
+        
+        if self.__head.data == elem:
+            self.remove_first()
+            return
 
         iterator = self.__head
 
-        while iterator.next is not None:
-            if iterator.next.data == elem:
+        while iterator is not None:
+            if  iterator.next is not None and iterator.next.data == elem:
                 iterator.next = iterator.next.next
                 self.__count -= 1
                 break
 
             iterator= iterator.next
 
+        return None
+
 
     def remove_first(self):
         """
         удалить первый элемент
         """
-        if self.__count != 0:
+        if not self.is_empty():
             self.__head = self.__head.next
             self.__count -= 1
-            return
         
         else:
-            raise ValueError('список пуст')
+            return None
         
 
     def remove_last(self):
         """
         удалить последний элемент
         """
-        if self.__count == 0:
-            raise ValueError('список пуст')
+        if self.is_empty():
+            return None
         
         if self.__head.next is None:
             self.__head = None
@@ -149,6 +159,9 @@ class LinkedList:
         найти позицию элемента (первое вхождение)
         :param elem: элемент для поиска
         """
+        if self.is_empty():
+            return None
+        
         if self.__head.next == None:
             if self.__head.data == elem:
                 return self.__head
