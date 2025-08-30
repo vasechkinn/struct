@@ -20,15 +20,9 @@ class Stack:
         Добавляет новую node на вершину стека.
         :return: none
         """
-        node = Stack.Node(data = data, prev = None)
+        node = Stack.Node(data = data, prev = self.__top)
 
-        if self.is_empty():
-            self.__top = node
-            return
-        
         self.__count += 1
-        
-        node.prev = self.__top
         self.__top = node
 
     def pop(self) -> any | None:
