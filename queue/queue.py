@@ -30,7 +30,7 @@ class Queue:
         self.__tail.prev = node
         self.__tail = node
 
-    def dequeue(self) -> Node | None:
+    def dequeue(self) -> any | None:
         """
         Удаляет и возвращает первый элемент из очереди.
         Если очередь пуста, возвращает None.
@@ -48,11 +48,11 @@ class Queue:
 
         return data.data
     
-    def peek(self) -> Node | None:
+    def peek(self) -> any | None:
         """
         Возвращает первый элемент из очереди без его удаления.
         Если очередь пуста, возвращает None.
-        :return: Node | None
+        :return: Node.data | None
         """
         if self.is_empty():
             return None
