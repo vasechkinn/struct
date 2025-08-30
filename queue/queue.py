@@ -22,13 +22,11 @@ class Queue:
         Добавляет data в конец очереди
         """
         node = Queue.Node(data = data, prev = None)
-        self.__count += 1
 
         if self.is_empty():
             self.__head = node
-            self.__tail = node
-            return
-        
+
+        self.__count += 1
         self.__tail.prev = node
         self.__tail = node
 
