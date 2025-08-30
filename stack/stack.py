@@ -21,11 +21,12 @@ class Stack:
         :return: none
         """
         node = Stack.Node(data = data, prev = None)
-        self.__count += 1
 
         if self.is_empty():
             self.__top = node
             return
+        
+        self.__count += 1
         
         node.prev = self.__top
         self.__top = node
