@@ -69,8 +69,17 @@ class LinkedList:
         if position < 1 or position > self.__count + 1:  raise ValueError('нумерация начинается с 1')
         node = Node(data=item, next=None)
 
-        if self.__head.next is None:
-            self.__head.next = node
+        if self.is_empty():
+            return None
+        
+        if self.__count +1 == position:
+            self.add(item)
+            return
+        
+        self.__count += 1
+        
+        if position == 1:
+            self.add_first(item)
             return
         
         iterator = self.__head
@@ -82,7 +91,6 @@ class LinkedList:
 
         node.next = iterator.next
         iterator.next = node
-        self.__count += 1
 
 
     def remove(self, elem: any):
