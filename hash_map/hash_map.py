@@ -19,45 +19,68 @@ class HashMap:
         :param key: ключ
         """
         hash = self.__hash(key)
-        self.__count += 1
 
         if self.__memory[hash] is None:
             self.__memory[hash] = HashMap.Node(key, value)
-            return
+            
         else:
             i = 1
             while self.__memory[hash] is not None:
                 hash = (hash + i**2) % self.__size
                 i += 1
-            
-            self.__memory[hash] = HashMap.Node(key, value)
+                if self.__size <= i:
+                    self.__realoc()
+                    
+            self.__memory[hash] = HashMap.Node(key, value, i)
+        
+        self.__count += 1
+
+    def __realoc(self):
+        old_memory = self.__memory
+        self.__size *= 2
+        self.__memory = [None] * self.__size
+
+        for i in range(len(old_memory)):
+            self.__memory.append(old_memory[i])
 
     def remove(self, key: any):
         """
         удалить элемент по ключу
         """
-        for i in range(self.__size):
-            if self.__memory[i] is not None:
-                if self.__memory[i].key == key:
-                    self.__memory[i] = None
-                    self.__count -= 1
-                    return 
+        hash = self.__hash(key)
+        if self.__memory[hash].count == 1:
+            self.__memory[hash] = None
+            self.__count -= 1
+
+        else:
+            count =self.__memory[hash].count
+            for i in range(count - 1):
+                hash = (hash + i**2) % self.__size
+                i += 1
+
+            if key == self.__memory[hash].key:
+                self.__memory[hash] = None
+                self.__count -= 1
+            return None
 
     def get(self, key) -> any:
         """
         найти значение по ключу
         """
         hash = self.__hash(key)
-        value = self.__memory[hash]
+        if self.__memory[hash].count == 1:
+            return self.__memory[hash].value
+            
+        else:
+            count =self.__memory[hash].count
+            for i in range(count - 1):
+                hash = (hash + i**2) % self.__size
+                i += 1
 
-        if value is None:  raise ValueError(f"Value not exists by key: {key}")
-
-        return value
-
-    def exist_by_key(self, key):
-        hash = self.__hash(key)
-        value = self.__memory[hash]
-        return not (value is None)
+            if key == self.__memory[hash].key:
+                return self.__memory[hash].value
+                
+        return None
 
     def __hash(self, key) -> int:
         return hash(key) % self.__size
