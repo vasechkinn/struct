@@ -11,6 +11,9 @@ class DoubleLinkedList:
         self.__tail = None
         self.__count = 0
 
+    def count(self):
+        return self.__count
+
     def is_empty(self):
         """
         проверка пустоты списка
@@ -25,13 +28,13 @@ class DoubleLinkedList:
         :return: none
         """
         node = Node(data = data, next = None, prev= self.__tail)
-        self.__count += 1
 
         if self.is_empty():
             self.__head = node
         else:
             self.__tail.next = node
         
+        self.__count += 1
         self.__tail = node
 
     def add_first(self, data: any) -> None:
@@ -42,13 +45,12 @@ class DoubleLinkedList:
         """
         node = Node(data = data, next = self.__head, prev =None)
 
-        self.__count += 1
-
         if self.is_empty():
             self.__tail = node
         else:
             self.__head.prev = node
 
+        self.__count += 1
         self.__head = node
 
     def insert(self, position: int, data: any) -> None :
