@@ -50,6 +50,9 @@ class HashMap:
         """
         удалить элемент по ключу
         """
+        if self.__count == 0:
+            return None
+        
         hash = self.__hash(key)
         if self.__memory[hash].count == 1:
             self.__memory[hash] = None
@@ -70,6 +73,9 @@ class HashMap:
         """
         найти значение по ключу
         """
+        if self.__count == 0:
+            return None
+        
         hash = self.__hash(key)
         if self.__memory[hash].count == 1:
             return self.__memory[hash].value
@@ -87,3 +93,6 @@ class HashMap:
 
     def __hash(self, key) -> int:
         return hash(key) % self.__size
+
+    def count(self):
+        return self.__count
