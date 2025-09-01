@@ -188,3 +188,5 @@ class LinkedList:
         self.__head = None
         self.__count = 0
 
+    def count(self):
+        return self.__count
