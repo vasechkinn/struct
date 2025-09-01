@@ -22,6 +22,9 @@ class HashMap:
 
         if self.__memory[hash] is None:
             self.__memory[hash] = HashMap.Node(key, value)
+
+        elif self.__memory[hash].key == key:
+            self.__memory[hash].value = value
             
         else:
             i = 1
