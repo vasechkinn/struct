@@ -11,6 +11,9 @@ class Deq:
         self.__tail = None
         self.__count = 0
 
+    def count(self):
+        return self.__count
+
     def is_empty(self) -> bool:
         """
         проверка пустоты списка
